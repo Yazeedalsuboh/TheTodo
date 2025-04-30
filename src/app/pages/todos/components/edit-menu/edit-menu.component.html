@@ -1,0 +1,51 @@
+<div
+  style="
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  "
+>
+  <button
+    mat-mini-fab
+    type="button"
+    title="check"
+    (click)="this.todoService.check(this.index)"
+  >
+    @if (todo.done) {
+    <mat-icon>check_circle_outline</mat-icon>
+    } @else {
+    <mat-icon>radio_button_unchecked</mat-icon>
+    }
+  </button>
+  <button
+    mat-mini-fab
+    type="button"
+    title="delete"
+    (click)="this.todoService.delete(this.index)"
+  >
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+  <button
+    mat-mini-fab
+    type="button"
+    title="notepad"
+    (click)="this.todoService.notepad(this.index)"
+  >
+    @if (todo.notepad) {
+    <mat-icon>task</mat-icon>
+
+    }@else {
+    <mat-icon>insert_drive_file</mat-icon>
+    }
+  </button>
+  <button
+    mat-mini-fab
+    type="button"
+    title="edit"
+    (click)="this.update(todo.id)"
+  >
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>

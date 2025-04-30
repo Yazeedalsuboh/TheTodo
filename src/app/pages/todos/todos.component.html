@@ -1,0 +1,24 @@
+<div class="todos">
+  @for (todo of this.todoService.todos(); track $index) {
+  <mat-card appearance="outlined">
+    <mat-card-title>{{ todo.text }}</mat-card-title>
+    <mat-card-subtitle>{{ todo.time }}</mat-card-subtitle>
+    @if (todo.urls.length) {
+
+    <mat-divider style="margin: 0.5rem 0rem 0.5rem 0rem"> </mat-divider>
+    <mat-card-content>
+      @for (url of todo.urls; track $index) {
+      <app-mat-chip-link
+        [name]="url.name"
+        [link]="url.link"
+      ></app-mat-chip-link>
+      }
+    </mat-card-content>
+
+    }
+    <mat-divider style="margin: 0.5rem 0rem 0.5rem 0rem"> </mat-divider>
+    <app-edit-menu [todo]="todo" [index]="$index" />
+  </mat-card>
+
+  }
+</div>

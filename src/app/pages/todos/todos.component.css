@@ -1,0 +1,12 @@
+.todos {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+mat-card {
+  padding: 1rem;
+}

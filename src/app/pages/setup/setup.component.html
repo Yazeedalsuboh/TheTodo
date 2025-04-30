@@ -1,0 +1,68 @@
+<form
+  style="
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  "
+  [formGroup]="todoForm"
+  (ngSubmit)="onSubmit()"
+>
+  <h1>Add To Do</h1>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Todo</mat-label>
+      <input matInput placeholder="e.g. exercise" formControlName="text" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Time</mat-label>
+      <input matInput placeholder="e.g. 13:10" formControlName="time" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <h1>Helpers</h1>
+
+    <div formArrayName="urls">
+      @for(field of urls.controls; let i = $index; track field) {
+      <div
+        [formGroupName]="i"
+        style="
+          display: flex;
+          flex-direction: row;
+          align-content: center;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+        "
+      >
+        <mat-form-field appearance="outline">
+          <mat-label>Link</mat-label>
+          <input
+            matInput
+            placeholder="e.g. https://www.google.com"
+            formControlName="link"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="e.g. google" formControlName="name" />
+        </mat-form-field>
+        <button mat-mini-fab type="button" (click)="removeFieldUrl(i)">
+          <mat-icon fontIcon="delete" style="margin: 0"></mat-icon>
+        </button>
+      </div>
+      }
+    </div>
+
+    <button mat-stroked-button type="button" (click)="addFieldUrl()">
+      Add Url
+    </button>
+  </div>
+  <button mat-stroked-button type="submit" [disabled]="todoForm.invalid">
+    Submit
+  </button>
+</form>
