@@ -10,7 +10,6 @@ export class TodoService {
   todo = signal<Todo>({
     id: 0,
     text: 'No Todos added yet!',
-    time: '00:00',
     notepad: false,
     done: false,
     urls: [],
@@ -18,10 +17,16 @@ export class TodoService {
 
   todoUpdateId = signal<number>(0);
 
+  findIndex(id: number) {
+    return this.todos().findIndex((todo) => todo.id === id);
+  }
+
   add(todo: Todo) {
     if (this.todoUpdateId()) {
       const todos = this.todos();
       const index = todos.findIndex((todo) => todo.id === this.todoUpdateId());
+
+      // const todoIndex = this.findIndex(id);
 
       if (index !== -1) {
         todo.id = this.todoUpdateId();
@@ -48,28 +53,20 @@ export class TodoService {
   }
 
   get() {
-    const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    let chosenTodo: Todo = {
+      id: 0,
+      text: 'Your done for today',
+      notepad: false,
+      done: false,
+      urls: [],
+    };
 
-    const todos = this.todos();
-
-    if (todos.length === 0) return;
-
-    let chosenTodo: Todo = todos[0];
-
-    let ref = 12000;
-
-    todos.forEach((todo) => {
-      const todoMinutes = this.timeToMinutes(todo.time);
-      const diff = currentMinutes - todoMinutes;
-
-      if (diff >= 0) {
-        if (diff < ref) {
-          ref = diff;
-          chosenTodo = todo;
-        }
+    for (let i = 0; i < this.todos().length; i++) {
+      if (!this.todos()[i].done) {
+        chosenTodo = this.todos()[i];
+        break;
       }
-    });
+    }
 
     return chosenTodo;
   }

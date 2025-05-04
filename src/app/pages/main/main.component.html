@@ -1,8 +1,22 @@
 <div class="main">
+  <div class="bar">
+    <button
+      mat-mini-fab
+      type="button"
+      title="check"
+      (click)="this.checkTodo()"
+      [disabled]="this.todo().id == 0"
+    >
+      @if (this.todo().done) {
+      <mat-icon>check_circle_outline</mat-icon>
+      } @else {
+      <mat-icon>radio_button_unchecked</mat-icon>
+      }
+    </button>
+  </div>
   <div class="todo">
-    <div class="title">
+    <div class="title" style="position: relative">
       <h1 class="text">{{ this.todo().text }}</h1>
-      <h1 class="time">{{ this.todo().time }}</h1>
     </div>
 
     <div class="note">

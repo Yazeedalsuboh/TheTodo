@@ -7,6 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatChipLinkComponent } from '../../components/mat-chip-link/mat-chip-link.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-main',
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatChipLinkComponent,
     MatInputModule,
+    MatCheckboxModule,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
@@ -27,16 +29,17 @@ export class MainComponent implements OnInit {
   todo = signal<Todo>({
     id: 0,
     text: 'No Todos added yet!',
-    time: '00:00',
     notepad: false,
     done: false,
     urls: [],
   });
 
+  checkTodo() {
+    this.todoService.check(this.todoService.findIndex(this.todo().id));
+    this.todo.set(this.todoService.get());
+  }
+
   ngOnInit(): void {
-    const todo = this.todoService.get();
-    if (todo) {
-      this.todo.set(todo);
-    }
+    this.todo.set(this.todoService.get());
   }
 }

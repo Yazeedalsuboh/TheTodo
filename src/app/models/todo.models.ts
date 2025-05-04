@@ -1,7 +1,6 @@
 export interface Todo {
   id: number;
   text: string;
-  time: string;
   notepad: Boolean;
   done: Boolean;
   urls: Url[];

@@ -44,7 +44,6 @@ export class SetupComponent implements OnInit {
   constructor() {
     this.todoForm = this.formBuilder.group({
       text: ['', Validators.required],
-      time: ['', Validators.required],
       notepad: [false, Validators.required],
       urls: this.formBuilder.array([]),
     });
@@ -58,7 +57,6 @@ export class SetupComponent implements OnInit {
     if (todo) {
       this.todoForm = this.formBuilder.group({
         text: [todo.text, Validators.required],
-        time: [todo.time, Validators.required],
         notepad: [todo.notepad, Validators.required],
         urls: this.formBuilder.array([]),
       });

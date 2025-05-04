@@ -4,8 +4,15 @@
   justify-content: center;
   align-content: center;
   text-align: center;
-  gap: 0.2rem;
+  gap: 2rem;
   margin-top: 1rem;
+}
+
+.main .bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
 .main .todo {
