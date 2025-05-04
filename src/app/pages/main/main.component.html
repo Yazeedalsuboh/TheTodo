@@ -1,27 +1,4 @@
 <div class="main">
   <app-bar />
-  <div class="todo">
-    <div class="title" style="position: relative">
-      <h1 class="text">{{ this.todoService.todo().text }}</h1>
-    </div>
-
-    <div class="note">
-      @if (this.todoService.todo().notepad) {
-      <form>
-        <mat-form-field appearance="outline">
-          <mat-label>Notes</mat-label>
-          <textarea matInput placeholder="Notes"></textarea>
-        </mat-form-field>
-      </form>
-      }
-    </div>
-
-    <div class="urls">
-      @for (url of this.todoService.todo().urls;track $index) {
-
-      <app-mat-chip-link [link]="url.link" [name]="url.name">
-      </app-mat-chip-link>
-      }
-    </div>
-  </div>
+  <app-todo />
 </div>
