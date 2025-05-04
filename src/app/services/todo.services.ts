@@ -9,7 +9,7 @@ export class TodoService {
 
   todo = signal<Todo>({
     id: 0,
-    text: 'No Todos added yet!',
+    text: 'Your done for today',
     notepad: false,
     done: false,
     urls: [],
@@ -53,22 +53,20 @@ export class TodoService {
   }
 
   get() {
-    let chosenTodo: Todo = {
+    this.todo.set({
       id: 0,
       text: 'Your done for today',
       notepad: false,
       done: false,
       urls: [],
-    };
+    });
 
     for (let i = 0; i < this.todos().length; i++) {
       if (!this.todos()[i].done) {
-        chosenTodo = this.todos()[i];
+        this.todo.set(this.todos()[i]);
         break;
       }
     }
-
-    return chosenTodo;
   }
 
   check(index: number) {

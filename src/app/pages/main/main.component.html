@@ -1,26 +1,12 @@
 <div class="main">
-  <div class="bar">
-    <button
-      mat-mini-fab
-      type="button"
-      title="check"
-      (click)="this.checkTodo()"
-      [disabled]="this.todo().id == 0"
-    >
-      @if (this.todo().done) {
-      <mat-icon>check_circle_outline</mat-icon>
-      } @else {
-      <mat-icon>radio_button_unchecked</mat-icon>
-      }
-    </button>
-  </div>
+  <app-bar />
   <div class="todo">
     <div class="title" style="position: relative">
-      <h1 class="text">{{ this.todo().text }}</h1>
+      <h1 class="text">{{ this.todoService.todo().text }}</h1>
     </div>
 
     <div class="note">
-      @if (this.todo().notepad) {
+      @if (this.todoService.todo().notepad) {
       <form>
         <mat-form-field appearance="outline">
           <mat-label>Notes</mat-label>
@@ -31,7 +17,7 @@
     </div>
 
     <div class="urls">
-      @for (url of this.todo().urls;track $index) {
+      @for (url of this.todoService.todo().urls;track $index) {
 
       <app-mat-chip-link [link]="url.link" [name]="url.name">
       </app-mat-chip-link>

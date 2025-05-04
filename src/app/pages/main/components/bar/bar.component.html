@@ -1,0 +1,15 @@
+<div class="bar">
+  <button
+    mat-mini-fab
+    type="button"
+    title="check"
+    (click)="this.checkTodo()"
+    [disabled]="this.todoService.todo().id === 0"
+  >
+    @if (this.todoService.todo().done) {
+    <mat-icon>check_circle_outline</mat-icon>
+    } @else {
+    <mat-icon>radio_button_unchecked</mat-icon>
+    }
+  </button>
+</div>

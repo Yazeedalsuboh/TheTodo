@@ -3,7 +3,6 @@
   <mat-card appearance="outlined">
     <mat-card-title>{{ todo.text }}</mat-card-title>
     @if (todo.urls.length) {
-
     <mat-divider style="margin: 0.5rem 0rem 0.5rem 0rem"> </mat-divider>
     <mat-card-content>
       @for (url of todo.urls; track $index) {
