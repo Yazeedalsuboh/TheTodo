@@ -24,9 +24,7 @@ export class TodoService {
   add(todo: Todo) {
     if (this.todoUpdateId()) {
       const todos = this.todos();
-      const index = todos.findIndex((todo) => todo.id === this.todoUpdateId());
-
-      // const todoIndex = this.findIndex(id);
+      const index = this.findIndex(this.todoUpdateId());
 
       if (index !== -1) {
         todo.id = this.todoUpdateId();
@@ -85,10 +83,5 @@ export class TodoService {
     this.todos()[index].notepad = !this.todos()[index].notepad;
 
     localStorage.setItem('thetodos', JSON.stringify(this.todos()));
-  }
-
-  private timeToMinutes(timeStr: string): number {
-    const [hh, mm] = timeStr.split(':').map(Number);
-    return hh * 60 + mm;
   }
 }
