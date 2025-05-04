@@ -15,6 +15,6 @@ export class AppComponent implements OnInit {
   todoService = inject(TodoService);
 
   ngOnInit(): void {
-    this.todoService.load();
+    this.todoService.loadFromLS();
   }
 }

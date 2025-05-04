@@ -1,0 +1,15 @@
+<div class="history">
+  <h1>History</h1>
+
+  @for (day of this.todoService.history() | keyvalue; track day.key) {
+  <h2>{{ day.key }}</h2>
+
+  <mat-chip-listbox>
+    @for (task of day.value; track $index) {
+    <mat-chip-option [selected]="task.done" selectable="false">{{
+      task.text
+    }}</mat-chip-option>
+    }
+  </mat-chip-listbox>
+  }
+</div>

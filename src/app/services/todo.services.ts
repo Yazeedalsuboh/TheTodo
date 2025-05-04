@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Todo } from '../models/todo.models';
+import { History, Todo } from '../models/todo.models';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +15,46 @@ export class TodoService {
     urls: [],
   });
 
+  history = signal<History>({
+    today: [],
+  });
+
   todoUpdateId = signal<number>(0);
 
   findIndex(id: number) {
     return this.todos().findIndex((todo) => todo.id === id);
+  }
+
+  getToday() {
+    const tomorrow = new Date();
+    const today = tomorrow.toISOString().split('T')[0];
+    return today;
+  }
+
+  storeToLS() {
+    const today = this.getToday();
+    const stored = localStorage.getItem('todos');
+    const todosData = stored ? JSON.parse(stored) : {};
+
+    todosData[today] = this.todos();
+    this.history.set(todosData);
+    localStorage.setItem('todos', JSON.stringify(todosData));
+  }
+
+  loadFromLS() {
+    const today = this.getToday();
+    const stored = localStorage.getItem('todos');
+
+    if (stored) {
+      const todosData = JSON.parse(stored);
+      if (todosData[today]) {
+        this.todos.set(todosData[today]);
+        this.history.set(todosData);
+        return;
+      }
+    }
+
+    this.storeToLS();
   }
 
   add(todo: Todo) {
@@ -39,15 +75,7 @@ export class TodoService {
       this.todos.set([...this.todos(), todo]);
     }
 
-    localStorage.setItem('thetodos', JSON.stringify(this.todos()));
-  }
-
-  load() {
-    const todos = localStorage.getItem('thetodos');
-
-    if (todos) {
-      this.todos.set(JSON.parse(todos));
-    }
+    this.storeToLS();
   }
 
   get() {
@@ -70,18 +98,18 @@ export class TodoService {
   check(index: number) {
     this.todos()[index].done = !this.todos()[index].done;
 
-    localStorage.setItem('thetodos', JSON.stringify(this.todos()));
+    this.storeToLS();
   }
 
   delete(index: number) {
     this.todos().splice(index, 1);
 
-    localStorage.setItem('thetodos', JSON.stringify(this.todos()));
+    this.storeToLS();
   }
 
   notepad(index: number) {
     this.todos()[index].notepad = !this.todos()[index].notepad;
 
-    localStorage.setItem('thetodos', JSON.stringify(this.todos()));
+    this.storeToLS();
   }
 }

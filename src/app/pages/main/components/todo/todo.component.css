@@ -1,0 +1,20 @@
+.todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.todo .text {
+  font-size: 6rem;
+  margin: 0;
+}
+
+.todo .urls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  flex-flow: row wrap;
+}

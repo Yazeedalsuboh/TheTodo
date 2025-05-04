@@ -1,3 +1,7 @@
+export interface History {
+  today: Todo[];
+}
+
 export interface Todo {
   id: number;
   text: string;
